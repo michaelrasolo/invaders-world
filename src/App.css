@@ -2,6 +2,23 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
  
+*{
+  /* background-color: #0e1e0e; */
+  /* color: whitesmoke; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #0e1e0e;
+  color: whitesmoke;
+}
+
+.Home{
+  height: 100vh;
+  
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
