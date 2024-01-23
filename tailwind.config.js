@@ -24,6 +24,9 @@ module.exports = {
       "bubble-gum": "#ff77e9",
       bermuda: "#78dcca",
       deepGreen: "#0e1e0e",
+      lightGreen:"#90A955",
+      medGreen:"#132A13"
+      
     },
     container: {
       center: true,

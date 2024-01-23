@@ -12,9 +12,9 @@ function Hero() {
             </p>
             <Link
               className="inline-flex h-10	items-center justify-center rounded-md bg-deepGreen text-white px-8 text-sm font-medium text-deepGreen shadow transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"
-              to="#"
+              to="/World"
             >
-              Check
+              See the world
             </Link>
           </div>
         </main>

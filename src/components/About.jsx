@@ -2,15 +2,15 @@ import React from "react";
 
 function About() {
   return (
-    <main className="h-screen flex justify-around items-center text-left text-white text-justify	">
-      <div className="h-5/6 ">
+    <main id="about" className="h-screen flex justify-around items-center text-left text-justify	">
+      <div className="h-5/6 shadow-lg  ">
         <img
           className="h-full"
           src="/backgrounds/Invader_Portrait.jpg"
           alt="Invader Portrait"
         />
       </div>
-      <div className="h-5/6 w-2/3 p-6 flex flex-col justify-around">
+      <div className="h-5/6 w-2/3 p-6 flex flex-col justify-around text-deepGreen font-medium">
         <h2 className="text-3xl text-center py-6 font-bold">Who the f*ck is Invader ?</h2>
         <p>
           Invader, the elusive French street artist, is like the superhero of

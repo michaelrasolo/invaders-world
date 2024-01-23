@@ -11,14 +11,30 @@
 }
 
 body{
-  background-color: #0e1e0e;
-  color: whitesmoke;
+  background-color: whitesmoke;
+  color: #0e1e0e;
 }
 
 .Home{
   height: 100vh;
   
 }
+
+.Navbar {
+  display: flex;
+  align-items: center;
+  width: 60vw;
+  justify-content: space-between;
+  border-radius: 3rem;
+  padding: 0.5rem 2rem;
+  position: fixed;
+  left: 20vw;
+  background: rgba(0, 15, 0, 0.8);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
