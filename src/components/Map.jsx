@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import SI_Api from "@/api/jsonServer";
 
 function Map() {
+  const [cities, setCities] = useState(null);
+  const fetchData = async () => {
+    try {
+      const data = await SI_Api.getAll();
+      setCities(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect( () => {
+
+    fetchData();
+  }, []);
+
+  const markers = cities && cities.map((city) => (
+    <Marker position={[city.latitude, city.longitude]} key={city.id}>
+      <Popup>
+        Invaders: {city.nbSpaceInvader}.
+        {/* <img src="" alt="" /> */}
+        <h1>{city.name}</h1>
+      </Popup>
+    </Marker>
+  ));
+
   return (
     <>
       <MapContainer
@@ -12,25 +38,9 @@ function Map() {
         style={{ height: "100vh", width: "100vw" }}
         className="z-10"
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        <Marker position={[51.505, -0.09]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-            <img src="/vite.svg" alt="Vite vite" />
-            <h1>Dat popup</h1>
-          </Popup>
-        </Marker>
-        <Marker position={[43.7159395, 10.4018624]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-            <img src="/vite.svg" alt="Vite vite" />
-            <h1>Dat popup</h1>
-          </Popup>
-        </Marker>
+        {markers}
       </MapContainer>
     </>
   );

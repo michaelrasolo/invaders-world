@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import "../App.css";
 function Navbar() {
   return (
@@ -17,9 +18,9 @@ function Navbar() {
           World
         </Link>
 
-        <Link className="text-white hover:underline" to="/about">
+        <HashLink className="text-white hover:underline" to="/#about">
           About
-        </Link>
+        </HashLink>
         <Link className="text-white hover:underline" to="#">
           Contact
         </Link>
