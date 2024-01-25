@@ -26,22 +26,22 @@ function CityForm() {
   const [pictureFile, setPictureFile] = useState("");
   const [pictureName, setPictureName] = useState("");
 
-function handlePicture(event) {
-  setPictureFile(event)
-  setPictureName(event.target.value)
-}
+  function handlePicture(event) {
+    setPictureFile(event);
+    setPictureName(event.target.value);
+  }
 
   async function uploadPic() {
     const file = pictureFile.target.files[0];
-    await cloudinary.upload(file);
+    return await cloudinary.upload(file);
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Set city's URL
     const url = name.toLowerCase().replace(/\s+/g, "-"); // Lower case + replace spaces with -
     // Upload image to cloudinary
-    const picture = uploadPic();
-    console.log("pic url",picture)
+    const pictureURL = await uploadPic();
+    console.log("URL defined by function", pictureURL);
     // Object to post
     const cityToPost = {
       name,
@@ -50,7 +50,7 @@ function handlePicture(event) {
       waveCount,
       nbSpaceInvader,
       points,
-      pictures: [picture],
+      pictures: [pictureURL],
       url,
     };
     try {
@@ -86,7 +86,7 @@ function handlePicture(event) {
               {/* INPUTS */}
               <section className="flex flex-col justify-between w-6/12">
                 <div>
-                  <Label id="name">City</Label>
+                  <Label htmlFor="name">City</Label>
                   <Input
                     onChange={(e) => setName(e.target.value)}
                     value={name}
@@ -95,7 +95,7 @@ function handlePicture(event) {
                   />
                 </div>
                 <div>
-                  <Label id="longitude">Longitude</Label>
+                  <Label htmlFor="longitude">Longitude</Label>
                   <Input
                     onChange={(e) => setLongitude(e.target.value)}
                     value={longitude}
@@ -105,7 +105,7 @@ function handlePicture(event) {
                   />
                 </div>
                 <div>
-                  <Label id="latitude">Latitude</Label>
+                  <Label htmlFor="latitude">Latitude</Label>
                   <Input
                     onChange={(e) => setLatitude(e.target.value)}
                     value={latitude}
@@ -115,7 +115,7 @@ function handlePicture(event) {
                   />
                 </div>
                 <div>
-                  <Label id="picture">Picture</Label>
+                  <Label htmlFor="picture">Picture</Label>
                   <Input
                     onChange={handlePicture}
                     value={pictureName}
@@ -126,7 +126,7 @@ function handlePicture(event) {
               </section>
               <section className="flex flex-col justify-between	h-full w-6/12">
                 <div>
-                  <Label id="waveCount">Waves</Label>
+                  <Label htmlFor="waveCount">Waves</Label>
                   <Input
                     onChange={(e) => setWaveCount(e.target.value)}
                     value={waveCount}
@@ -137,7 +137,7 @@ function handlePicture(event) {
                   />
                 </div>
                 <div>
-                  <Label id="nbSpaceInvader">Number of invaders</Label>
+                  <Label htmlFor="nbSpaceInvader">Number of invaders</Label>
                   <Input
                     onChange={(e) => setNbSpaceInvader(e.target.value)}
                     value={nbSpaceInvader}
@@ -148,7 +148,7 @@ function handlePicture(event) {
                   />
                 </div>
                 <div>
-                  <Label id="points">Total points</Label>
+                  <Label htmlFor="points">Total points</Label>
                   <Input
                     onChange={(e) => setPoints(e.target.value)}
                     value={points}

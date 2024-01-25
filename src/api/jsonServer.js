@@ -1,6 +1,6 @@
 import axios from "axios";
 const JSONSERVER = import.meta.env.VITE_JSONSERVER;
-console.log(JSONSERVER);
+// console.log(JSONSERVER);
 
 const SI_Api = axios.create({
   baseURL: JSONSERVER,

@@ -12,7 +12,7 @@ cloudinary.upload = async function (file) {
     formData.append('upload_preset',CLD_PRESET)
     
     const response = await cloudinary.post('/upload',formData)
-    console.log(response.data.secure_url)
+    console.log("API Response", response.data.secure_url)
     return response.data.secure_url
 }
 export default cloudinary;

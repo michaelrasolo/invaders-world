@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <main id="about" className="h-screen flex justify-around items-center text-left text-justify	">
+    <aside id="about" className="h-screen flex justify-around items-center text-left text-justify	">
       <div className="h-5/6 shadow-lg  ">
         <img
           className="h-full"
@@ -37,7 +37,7 @@ function About() {
           begin!
         </p>
       </div>
-    </main>
+    </aside>
   );
 }
 
