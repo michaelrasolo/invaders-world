@@ -19,6 +19,9 @@ function Navbar() {
         <Link className="text-white hover:underline" to="/">
           Home
         </Link>
+        <Link className="text-white hover:underline" to="/city/marseille">
+          marseille
+        </Link>
         <Link className="text-white hover:underline" to="/World">
           World
         </Link>

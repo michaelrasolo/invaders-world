@@ -63,7 +63,7 @@ function CityForm() {
 
   return (
     <Drawer className="z-40">
-      <DrawerTrigger className="z-40" asChild>
+      <DrawerTrigger  asChild>
         <Button className="absolute bottom-8 right-8 rounded-full h-16 w-16 p-0">
           <PlusCircleIcon size={40} />
         </Button>
@@ -164,7 +164,7 @@ function CityForm() {
           {/* FOOTER */}
           <DrawerFooter className="flex flex-row gap-8 items-center justify-center">
             <Button type="submit" onClick={handleSubmit}>
-              Create the invasion!
+              Create the invasion !
             </Button>
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
