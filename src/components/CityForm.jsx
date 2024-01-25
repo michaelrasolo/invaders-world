@@ -13,7 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SI_Api from "@/api/jsonServer";
-import { PlusCircleIcon } from 'lucide-react';
+import { PlusCircleIcon } from "lucide-react";
+import cloudinary from "@/api/cloudinary";
 
 function CityForm() {
   const [name, setName] = useState("");
@@ -22,12 +23,26 @@ function CityForm() {
   const [waveCount, setWaveCount] = useState("");
   const [nbSpaceInvader, setNbSpaceInvader] = useState("");
   const [points, setPoints] = useState("");
-  const [picture, setPicture] = useState("");
+  const [pictureFile, setPictureFile] = useState("");
+  const [pictureName, setPictureName] = useState("");
 
+function handlePicture(event) {
+  setPictureFile(event)
+  setPictureName(event.target.value)
+}
+
+  async function uploadPic() {
+    const file = pictureFile.target.files[0];
+    await cloudinary.upload(file);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Set city's URL
     const url = name.toLowerCase().replace(/\s+/g, "-"); // Lower case + replace spaces with -
-
+    // Upload image to cloudinary
+    const picture = uploadPic();
+    console.log("pic url",picture)
+    // Object to post
     const cityToPost = {
       name,
       longitude,
@@ -49,7 +64,9 @@ function CityForm() {
   return (
     <Drawer className="z-40">
       <DrawerTrigger className="z-40" asChild>
-        <Button className="absolute bottom-8 right-8 rounded-full h-16 w-16 p-0"><PlusCircleIcon size={40} /></Button>
+        <Button className="absolute bottom-8 right-8 rounded-full h-16 w-16 p-0">
+          <PlusCircleIcon size={40} />
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="z-50 mx-auto w-full max-w-xl flex flex-col justify-center items-center">
@@ -100,8 +117,8 @@ function CityForm() {
                 <div>
                   <Label id="picture">Picture</Label>
                   <Input
-                    onChange={(e) => setPicture(e.target.value)}
-                    value={picture}
+                    onChange={handlePicture}
+                    value={pictureName}
                     id="picture"
                     type="file"
                   />
@@ -143,8 +160,6 @@ function CityForm() {
                 </div>
               </section>
             </div>
-            {/* PICTURE */}
-            <section className="w-full flex  justify-around"></section>
           </form>
           {/* FOOTER */}
           <DrawerFooter className="flex flex-row gap-8 items-center justify-center">

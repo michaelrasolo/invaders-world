@@ -3,20 +3,19 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import SI_Api from "@/api/jsonServer";
 import CircularProgress from "@mui/material/CircularProgress";
-import { PlusCircleIcon } from 'lucide-react';
-import { Button } from "@/components/ui/button";
 import "../App.css";
+
+
 function Map() {
   const [cities, setCities] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
-  const  pin = L.icon({
-    iconUrl: '/logos/map_pin.png',  // custom pin icon
-    iconSize:     [30, 30], // size of the icon
-    iconAnchor:   [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
-  });
 
+  const pin = L.icon({
+    iconUrl: "/logos/map_pin.png", // custom pin icon
+    iconSize: [30, 30], // size of the icon
+    iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -15], // point from which the popup should open relative to the iconAnchor
+  });
 
   const fetchData = async () => {
     try {
@@ -38,7 +37,11 @@ function Map() {
   const markers =
     cities &&
     cities.map((city) => (
-      <Marker position={[city.latitude, city.longitude]} key={city.id} icon={pin}>
+      <Marker
+        position={[city.latitude, city.longitude]}
+        key={city.id}
+        icon={pin}
+      >
         <Popup>
           <h1>{city.name}</h1>
           Invaders: {city.nbSpaceInvader}.{/* <img src="" alt="" /> */}
@@ -47,9 +50,7 @@ function Map() {
     ));
 
   return (
-    < >
-    {/* <Button className="ButtonBG absolute z-20 bottom-8 right-8 rounded-full h-24 flex flex-col "><PlusCircleIcon/>Add a city</Button> */}
-      
+    <>
       {isLoading && (
         <div
           style={{ backgroundColor: "hsla(0, 0%, 0%, 0.3)" }}
@@ -59,7 +60,6 @@ function Map() {
         </div>
       )}
 
-      
       <MapContainer
         center={[48.775, 9.182]}
         zoom={4.1}
@@ -69,7 +69,6 @@ function Map() {
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {markers}
-        
       </MapContainer>
     </>
   );
