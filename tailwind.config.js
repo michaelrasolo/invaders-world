@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  corePlugins: {
+    colors: true,
+  },
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,jsx}",
@@ -25,8 +28,16 @@ module.exports = {
       bermuda: "#78dcca",
       deepGreen: "#0e1e0e",
       lightGreen:"#90A955",
-      medGreen:"#132A13"
-      
+      medGreen:"#132A13",
+      'blue': '#1fb6ff',
+      'purple': '#7e5bef',
+      'pink': '#ff49db',
+      'orange': '#ff7849',
+      'green': '#13ce66',
+      'yellow': '#ffc82c',
+      'gray-dark': '#273444',
+      'gray': '#8492a6',
+      'gray-light': '#d3dce6',
     },
     container: {
       center: true,

@@ -35,6 +35,18 @@ body{
   -webkit-backdrop-filter: blur(5px);
 }
 
+.ButtonBG{
+  background: rgba(0, 15, 0, 0.8);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.ButtonBG:hover{
+  background: rgba(0, 15, 0, 0.9);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
