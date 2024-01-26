@@ -35,8 +35,7 @@ function Map() {
     fetchData();
   }, []);
 
-  const markers =
-    cities &&
+  const markers =    cities &&
     cities.map((city) => (
       <Marker
         position={[city.latitude, city.longitude]}

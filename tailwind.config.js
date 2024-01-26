@@ -13,7 +13,11 @@ module.exports = {
   prefix: "",
   theme: {
     backgroundImage:{
-      'hero1':"url('/backgrounds/hero2.webp')"
+      'hero2':"url('/backgrounds/hero2.webp')",
+      'hero1':"url('/backgrounds/hero1.jpg')",
+      'hero3':"url('/backgrounds/hero3.jpg')",
+      'hero4':"url('/backgrounds/hero4.jpg')",
+      'hero5':"url('/backgrounds/hero5.jpg')"
     },
     colors: {
       transparent: "transparent",

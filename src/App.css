@@ -8,13 +8,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Silkscreen', monospace;
 }
 
 body{
   background-color: whitesmoke;
   color: #0e1e0e;
+  font-family: 'Silkscreen', monospace;
 }
 
+p{
+  font-family: 'VT323', monospace;
+
+}
 .Home{
   height: 100vh;
   
