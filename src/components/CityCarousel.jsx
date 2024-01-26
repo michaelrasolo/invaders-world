@@ -1,4 +1,8 @@
-import * as React from "react";
+
+// bouton submit form
+// randomize hero banner
+
+import { useRef } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -9,32 +13,31 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card";
 
-function CityCarousel() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
-  );
-
+function CityCarousel({ location }) {
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+  const locationPictures = location.pictures;
+  const pictures =
+    location &&
+    locationPictures.map((picture, i) => (
+      <CarouselItem key={i}>
+        <div className="p-1 ">
+          <Card className="w-full max-w-3xl h-5/6 ">
+            <CardContent className="h-5/6 flex object-cover items-center justify-center p-0">
+              <img className="object-cover aspect-[16/9]" src={picture} alt={`Picture ${i} of ${location.name}`} />
+            </CardContent>
+          </Card>
+        </div>
+      </CarouselItem>
+    ));
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-xs"
+      className="w-full max-w-3xl border "
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
       <CarouselPrevious />
+      <CarouselContent>{pictures}</CarouselContent>
       <CarouselNext />
     </Carousel>
   );

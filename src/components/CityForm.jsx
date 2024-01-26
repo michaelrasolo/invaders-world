@@ -13,7 +13,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SI_Api from "@/api/jsonServer";
-import { PlusCircleIcon } from "lucide-react";
+import { PlusCircleIcon, Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 import cloudinary from "@/api/cloudinary";
 
 function CityForm() {
@@ -25,6 +27,8 @@ function CityForm() {
   const [points, setPoints] = useState("");
   const [pictureFile, setPictureFile] = useState("");
   const [pictureName, setPictureName] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   function handlePicture(event) {
     setPictureFile(event);
@@ -35,6 +39,18 @@ function CityForm() {
     const file = pictureFile.target.files[0];
     return await cloudinary.upload(file);
   }
+  const resetStates = () => {
+    setName("");
+    setLongitude("");
+    setLatitude("");
+    setWaveCount("");
+    setNbSpaceInvader("");
+    setPoints("");
+    setPictureFile("");
+    setPictureName("");
+    setSubmitting(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Set city's URL
@@ -54,17 +70,25 @@ function CityForm() {
       url,
     };
     try {
+      // POST Request to the JSON Server
       const response = await SI_Api.post("/cities", cityToPost);
       console.log("Post response:", response.data);
+      // Button display
+      setSubmitting(true);
+      // Navigation to new place
+      setTimeout(() => {
+        resetStates();
+        navigate(`/city/${url}`);
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <Drawer className="z-40">
-      <DrawerTrigger  asChild>
-        <Button className="absolute bottom-8 right-8 rounded-full h-16 w-16 p-0">
+    <Drawer className="z-50">
+      <DrawerTrigger asChild>
+        <Button className="z-50 absolute bottom-8 right-8 rounded-full h-16 w-16 p-0">
           <PlusCircleIcon size={40} />
         </Button>
       </DrawerTrigger>
@@ -163,9 +187,16 @@ function CityForm() {
           </form>
           {/* FOOTER */}
           <DrawerFooter className="flex flex-row gap-8 items-center justify-center">
-            <Button type="submit" onClick={handleSubmit}>
-              Create the invasion !
-            </Button>
+            {!submitting ? (
+              <Button type="submit" onClick={handleSubmit}>
+                Create the invasion !
+              </Button>
+            ) : (
+              <Button disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </Button>
+            )}
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
             </DrawerClose>

@@ -1,9 +1,10 @@
 import axios from "axios";
 const CLD_PRESET = import.meta.env.VITE_CLD_PRESET;
-const CLD_NAME = import.meta.env.VITE_CLD_NAME;
+// const CLD_NAME = import.meta.env.VITE_CLD_NAME;
+const CLD_URL = import.meta.env.VITE_CLD_URL;
 
 const cloudinary = axios.create({
-  baseURL: `https://api.cloudinary.com/v1_1/${CLD_NAME}/image`,
+  baseURL: CLD_URL,
 });
 
 cloudinary.upload = async function (file) {

@@ -1,32 +1,17 @@
-import React, { useEffect, useState } from "react";
-import SI_Api from "@/api/jsonServer";
-import { useParams } from "react-router-dom";
-import { MapPin, RefreshCcw, Gamepad, Hash } from "lucide-react";
-
-function CityDetails() {
-  const [location, setLocation] = useState("");
-  const { cityName } = useParams();
-  async function getCityDetails() {
-    try {
-      const details = await SI_Api.getCity(cityName);
-      setLocation(details);
-      console.log(details);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useEffect(() => {
-    getCityDetails();
-  }, []);
-
+import React from "react";
+import { MapPin, RefreshCcw, Gamepad, Hash, ImagePlus, SquarePen  } from "lucide-react";
+import { Button } from "./ui/button";
+function CityDetails({ location }) {
   return (
-    <article className="h-screen flex justify-around items-center text-left text-justify	">
-      <div className="h-5/6"></div>
-      <div className="border border-blue h-5/6 w-2/6 p-6 flex flex-col justify-center text-deepGreen font-medium">
-        <h2 className="text-3xl text-center py-2 font-bold p-0 m-0 flex gap-4 items-center justify-center w-full">
-          <MapPin />
+    <article className="h-full w-1/4 p-6 flex flex-col justify-around text-deepGreen font-medium">
+        <div className="flex items-center justify-center">
+          <MapPin size={40} />
+                <h2 className="text-3xl text-center py-2 font-bold p-0 m-0 flex gap-4 items-center justify-center text-wrap	">
           {location.name}
-        </h2>
+                </h2>
+        </div>
+
+      <div>
         <p className="flex gap-4 items-center my-2 ">
           <Hash />
           Invaders: {location.nbSpaceInvader}
@@ -41,6 +26,10 @@ function CityDetails() {
           <Gamepad />
           Points: {location.points}
         </p>
+      </div>
+      <div className="flex flex-col gap-4">
+<Button className="gap-1"><ImagePlus/>Add an invader</Button>
+<Button className="gap-1" variant="outline"> <SquarePen/>Edit</Button>
       </div>
     </article>
   );

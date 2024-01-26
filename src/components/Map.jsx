@@ -4,7 +4,8 @@ import "leaflet/dist/leaflet.css";
 import SI_Api from "@/api/jsonServer";
 import CircularProgress from "@mui/material/CircularProgress";
 import "../App.css";
-
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 function Map() {
   const [cities, setCities] = useState(null);
@@ -12,15 +13,15 @@ function Map() {
 
   const pin = L.icon({
     iconUrl: "/logos/map_pin.png", // custom pin icon
-    iconSize: [30, 30], // size of the icon
-    iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
-    popupAnchor: [0, -15], // point from which the popup should open relative to the iconAnchor
+    iconSize: [30, 30], // icon size
+    iconAnchor: [15, 15], // point corresponding to marker's location
+    popupAnchor: [0, -15], // point where popup opens
   });
 
   const fetchData = async () => {
     try {
       const data = await SI_Api.getAll();
-      // setInterval to see the loader
+      // setInterval just to see the loader
       setInterval(() => {
         setCities(data);
         setIsLoading(false);
@@ -43,8 +44,19 @@ function Map() {
         icon={pin}
       >
         <Popup>
-          <h1>{city.name}</h1>
-          Invaders: {city.nbSpaceInvader}.{/* <img src="" alt="" /> */}
+          <div className="flex flex-col justify-around items-center gap-4">
+            <h1 className="text-lg text-center font-semibold text-pretty">
+              {city.name}
+            </h1>
+              <Link to={`/city/${city.url}`}>
+            <Button>
+                {" "}
+                {`${city.nbSpaceInvader} invader${
+                  city.nbSpaceInvader > 1 ? "s" : ""
+                }`}
+            </Button>
+              </Link>
+          </div>
         </Popup>
       </Marker>
     ));
